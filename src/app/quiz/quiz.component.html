@@ -1,0 +1,21 @@
+<div class="quiz-content">
+  <h3>{{ quiz.category }}</h3>
+  <div class="image-container">
+    <img [src]="quiz.imageUrl" [alt]="quiz.category" />
+    <div class="middle">
+      <button mat-button (click)="openDialog()">Start quiz</button>
+    </div>
+  </div>
+
+  <div>
+    <span>
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Example icon button with a heart icon"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </span>
+  </div>
+</div>
