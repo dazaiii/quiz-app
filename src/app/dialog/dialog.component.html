@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Quiz options</h2>
+<mat-dialog-content class="mat-typography">
+  <div>
+    <label>Difficulty: </label>
+    <label>{{ difficulty }}</label>
+  </div>
+  <mat-slider
+    tickInterval="1"
+    step="1"
+    min="1"
+    max="3"
+    (input)="getDifficulty($event)"
+  ></mat-slider>
+  <div>
+    <label>Number of questions: </label>
+    <label>{{ questionsAmount }}</label>
+  </div>
+  <mat-slider
+    tickInterval="1"
+    step="1"
+    min="1"
+    max="15"
+    (input)="getQuestionsAmount($event)"
+  ></mat-slider>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <nav>
+    <button
+      mat-button
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+      routerLink="quiz"
+    >
+      Start quiz
+    </button>
+  </nav>
+</mat-dialog-actions>
