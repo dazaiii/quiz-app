@@ -1,6 +1,5 @@
-import { ElementSchemaRegistry } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { QuizCategory, QuizDifficulty } from 'src/models/quiz.models';
+import { QuizDifficulty } from 'src/models/quiz.models';
 
 @Component({
   selector: 'app-dialog',
