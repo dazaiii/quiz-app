@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Quiz options</h2>
+<h2 mat-dialog-title>{{ quizCategory }} quiz options</h2>
 <mat-dialog-content class="mat-typography">
   <div>
     <label>Difficulty: </label>
@@ -9,7 +9,7 @@
     step="1"
     min="1"
     max="3"
-    (input)="getDifficulty($event)"
+    (input)="saveDifficulty($event)"
   ></mat-slider>
   <div>
     <label>Number of questions: </label>
@@ -20,7 +20,7 @@
     step="1"
     min="1"
     max="15"
-    (input)="getQuestionsAmount($event)"
+    (input)="saveQuestionsAmount($event)"
   ></mat-slider>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
@@ -31,6 +31,7 @@
       [mat-dialog-close]="true"
       cdkFocusInitial
       routerLink="/quiz"
+      (click)="saveQuizCategory()"
     >
       Start quiz
     </button>

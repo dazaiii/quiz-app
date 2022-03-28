@@ -17,35 +17,15 @@ export class QuizComponent implements OnInit {
     favorite: false,
   };
 
-  constructor(
-    private quizHttpService: QuizHttpService,
-    public dialog: MatDialog
-  ) {}
+  constructor(public dialog: MatDialog) {}
 
-  quizes: any[] = [];
-
-  ngOnInit(): void {
-    this.getQuestions();
-  }
+  ngOnInit(): void {}
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
+    dialogRef.componentInstance.quizCategory = this.quiz.category;
     dialogRef.afterClosed().subscribe((result) => {
       console.log('Dialog result: ${result}');
     });
-  }
-
-  getQuestions() {
-    this.quizHttpService
-      .getQuestions(QuizCategory.Linux, QuizDifficulty.Hard)
-      .subscribe(
-        (response) => {
-          this.quizes = response;
-          console.log(this.quizes);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
   }
 }

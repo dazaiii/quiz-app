@@ -1,0 +1,48 @@
+.question {
+  margin: 1rem;
+  padding: 1rem;
+  border: 0.2rem solid lightblue;
+  margin-right: 15%;
+  margin-left: 15%;
+  line-height: 1.5rem;
+}
+
+.quiz-information {
+  display: flex;
+  justify-content: center;
+}
+
+.questions-amount {
+  margin-right: 2rem;
+}
+
+h1 {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  margin: 0.4rem;
+}
+
+div {
+  font-size: 1rem;
+}
+
+.next-button {
+  float: right;
+  margin-right: 15%;
+}
+
+.previous-button {
+  float: right;
+}
+
+:host::ng-deep.mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+:host::ng-deep.mat-checkbox-inner-container {
+  margin-top: 4px;
+}

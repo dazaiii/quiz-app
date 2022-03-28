@@ -23,12 +23,13 @@ export class QuizHttpService {
 
   getQuestions(
     category: QuizCategory,
-    difficulty: QuizDifficulty
+    difficulty: QuizDifficulty,
+    limit: number
   ): Observable<any> {
-    let params = new HttpParams();
-    // .append('limit', 10)
-    // .append('category', category)
-    // .append('difficulty', difficulty);
+    let params = new HttpParams()
+      .append('limit', limit)
+      .append('category', category)
+      .append('difficulty', difficulty);
 
     return this.http.get(this.url, {
       headers: this.headers,

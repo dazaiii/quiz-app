@@ -18,9 +18,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { QuizPageComponent } from './quiz-page/quiz-page.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, QuizComponent, DialogComponent, QuizPageComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    QuizComponent,
+    DialogComponent,
+    QuizPageComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +42,8 @@ import { QuizPageComponent } from './quiz-page/quiz-page.component';
     HttpClientModule,
     MatDialogModule,
     MatSliderModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,1 +1,60 @@
-<p>quiz-page works!</p>
+<h1>{{ getQuizCategory() }} Quiz page</h1>
+<div class="quiz-information">
+  <div class="questions-amount">
+    Questions amount: {{ getQuestionsAmount() }}
+  </div>
+  <div>Difficulty: {{ getDifficulty() }}</div>
+</div>
+
+<section [formGroup]="answers">
+  <div class="question" *ngIf="question">
+    <div>{{ question.question }}</div>
+    <div *ngIf="question.answers.answer_a">
+      <p>
+        <mat-checkbox formControlName="a">{{
+          question.answers.answer_a
+        }}</mat-checkbox>
+      </p>
+    </div>
+    <div *ngIf="question.answers.answer_b">
+      <p>
+        <mat-checkbox formControlName="b">{{
+          question.answers.answer_b
+        }}</mat-checkbox>
+      </p>
+    </div>
+    <div *ngIf="question.answers.answer_c">
+      <p>
+        <mat-checkbox formControlName="c">{{
+          question.answers.answer_c
+        }}</mat-checkbox>
+      </p>
+    </div>
+    <div *ngIf="question.answers.answer_d">
+      <p>
+        <mat-checkbox formControlName="d">{{
+          question.answers.answer_d
+        }}</mat-checkbox>
+      </p>
+    </div>
+    <div *ngIf="question.answers.answer_e">
+      <p>
+        <mat-checkbox formControlName="e">{{
+          question.answers.answer_e
+        }}</mat-checkbox>
+      </p>
+    </div>
+    <div *ngIf="question.answers.answer_f">
+      <p>
+        <mat-checkbox formControlName="f">{{
+          question.answers.answer_f
+        }}</mat-checkbox>
+      </p>
+    </div>
+  </div>
+</section>
+
+<button mat-button class="next-button" (click)="nextQuestion()">Next</button>
+<button mat-button class="previous-button" (click)="previousQuestion()">
+  Previous
+</button>

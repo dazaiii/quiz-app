@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizDifficulty } from 'src/models/quiz.models';
+import { QuizCategory, QuizDifficulty } from 'src/models/quiz.models';
+import { QuizService } from '../quiz.service';
 
 @Component({
   selector: 'app-dialog',
@@ -11,11 +12,13 @@ export class DialogComponent implements OnInit {
 
   questionsAmount: number = 1;
 
-  constructor() {}
+  quizCategory: QuizCategory = QuizCategory.Linux;
+
+  constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {}
 
-  getDifficulty(event: any) {
+  saveDifficulty(event: any) {
     switch (event.value) {
       case 1:
         this.difficulty = QuizDifficulty.Easy;
@@ -27,9 +30,15 @@ export class DialogComponent implements OnInit {
         this.difficulty = QuizDifficulty.Hard;
         break;
     }
+    this.quizService.addDifficulty(this.difficulty);
   }
 
-  getQuestionsAmount(event: any) {
+  saveQuestionsAmount(event: any) {
     this.questionsAmount = event.value;
+    this.quizService.addQuestionsAmount(this.questionsAmount);
+  }
+
+  saveQuizCategory() {
+    this.quizService.addQuizCategory(this.quizCategory);
   }
 }
