@@ -54,7 +54,20 @@
   </div>
 </section>
 
-<button mat-button class="next-button" (click)="nextQuestion()">Next</button>
-<button mat-button class="previous-button" (click)="previousQuestion()">
-  Previous
-</button>
+<div>
+  <button mat-button class="next-button" (click)="nextQuestion()">Next</button>
+  <button mat-button class="previous-button" (click)="previousQuestion()">
+    Previous
+  </button>
+</div>
+
+<div *ngIf="displaySubmitButton">
+  <button
+    mat-button
+    class="submit-button"
+    routerLink="/result"
+    (click)="checkAnswer()"
+  >
+    Submit
+  </button>
+</div>

@@ -26,11 +26,17 @@ export class QuizHttpService {
     difficulty: QuizDifficulty,
     limit: number
   ): Observable<any> {
-    let params = new HttpParams()
-      .append('limit', limit)
-      .append('category', category)
-      .append('difficulty', difficulty);
-
+    let params;
+    if (category === QuizCategory.Random) {
+      params = new HttpParams()
+        .append('limit', limit)
+        .append('difficulty', difficulty);
+    } else {
+      params = new HttpParams()
+        .append('limit', limit)
+        .append('category', category)
+        .append('difficulty', difficulty);
+    }
     return this.http.get(this.url, {
       headers: this.headers,
       params: params,

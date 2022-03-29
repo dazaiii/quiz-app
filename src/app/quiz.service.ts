@@ -13,6 +13,12 @@ export class QuizService {
 
   quizCategory: QuizCategory = QuizCategory.Linux;
 
+  maxQuestionsAmount: number = 15;
+
+  score: number[] = [];
+
+  points: number = 0;
+
   addQuestionsAmount(questionAmount: number) {
     this.questionsAmount = questionAmount;
   }
@@ -25,6 +31,17 @@ export class QuizService {
     this.difficulty = difficulty;
   }
 
+  addMaxQuestionsAmount(maxQuestionsAmount: number) {
+    this.maxQuestionsAmount = maxQuestionsAmount;
+    if (this.questionsAmount > this.maxQuestionsAmount) {
+      this.questionsAmount = this.maxQuestionsAmount;
+    }
+  }
+
+  addScore(score: number[]) {
+    this.score = score;
+  }
+
   getDifficulty(): QuizDifficulty {
     return this.difficulty;
   }
@@ -35,5 +52,9 @@ export class QuizService {
 
   getQuizCategory(): QuizCategory {
     return this.quizCategory;
+  }
+
+  getScore() {
+    return this.score;
   }
 }

@@ -33,7 +33,9 @@ export class QuizPageComponent implements OnInit {
 
   answers: FormGroup;
 
-  score: number = 0;
+  score: number[] = [];
+
+  displaySubmitButton: boolean = false;
 
   ngOnInit(): void {
     this.getQuestions();
@@ -72,6 +74,7 @@ export class QuizPageComponent implements OnInit {
 
   nextQuestion() {
     if (this.questionNumber === this.getQuestionsAmount() - 1) {
+      this.displaySubmitButton = true;
       return;
     }
     this.checkAnswer();
@@ -84,25 +87,22 @@ export class QuizPageComponent implements OnInit {
       return;
     }
     this.questionNumber -= 1;
+    this.score[this.questionNumber] = 0;
     this.question = this.questions[this.questionNumber];
   }
 
   checkAnswer() {
-    console.log(this.answers.value);
-    console.log(this.question.correct_answers);
     const correctAnswers = (
       Object.values(this.question.correct_answers) as string[]
     ).map((x) => x.toLowerCase() === 'true');
-    //.map((a: string) => {
-    //return a.toLowerCase() === 'true';
-    //});
     const values = Object.values(this.answers.value) as boolean[];
-    console.log(correctAnswers);
-    console.log(values);
     if (values.every((val, index) => correctAnswers[index] === val)) {
-      this.score += 1;
+      this.score[this.questionNumber] = 1;
+    } else {
+      this.score[this.questionNumber] = 0;
     }
     console.log('score: ', this.score);
+
     this.answers.reset({
       a: false,
       b: false,
@@ -111,5 +111,6 @@ export class QuizPageComponent implements OnInit {
       e: false,
       f: false,
     });
+    this.quizService.addScore(this.score);
   }
 }

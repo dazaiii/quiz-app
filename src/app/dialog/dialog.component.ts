@@ -40,5 +40,32 @@ export class DialogComponent implements OnInit {
 
   saveQuizCategory() {
     this.quizService.addQuizCategory(this.quizCategory);
+    this.setMaxNumberOfQuestions();
+  }
+
+  setMaxNumberOfQuestions() {
+    let maxNumberOfQuestions: number;
+    if (
+      this.quizCategory === QuizCategory.CMS &&
+      this.difficulty === QuizDifficulty.Hard
+    ) {
+      maxNumberOfQuestions = 7;
+    } else if (
+      this.quizCategory === QuizCategory.Docker &&
+      (this.difficulty === QuizDifficulty.Easy ||
+        this.difficulty === QuizDifficulty.Hard)
+    ) {
+      maxNumberOfQuestions = 11;
+    } else if (
+      this.quizCategory === QuizCategory.DevOps &&
+      (this.difficulty === QuizDifficulty.Easy ||
+        this.difficulty === QuizDifficulty.Hard)
+    ) {
+      maxNumberOfQuestions = 5;
+    } else {
+      maxNumberOfQuestions = 15;
+    }
+    this.quizService.addMaxQuestionsAmount(maxNumberOfQuestions);
+    return maxNumberOfQuestions;
   }
 }

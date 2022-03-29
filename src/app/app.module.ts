@@ -20,6 +20,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { QuizPageComponent } from './quiz-page/quiz-page.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
+import { QuizResultComponent } from './quiz-result/quiz-result.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     QuizComponent,
     DialogComponent,
     QuizPageComponent,
+    QuizResultComponent,
   ],
   imports: [
     BrowserModule,

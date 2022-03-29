@@ -39,6 +39,11 @@ div {
   float: right;
 }
 
+.submit-button {
+  float: left;
+  margin-left: 15%;
+}
+
 :host::ng-deep.mat-checkbox-layout {
   white-space: normal !important;
 }
