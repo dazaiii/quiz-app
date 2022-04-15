@@ -1,6 +1,8 @@
+@import "../importable/colors.scss";
+
 mat-toolbar {
-  background: lightblue;
-  color: white;
+  background: $lightblue;
+  color: $white;
   display: flex;
   justify-content: center;
   align-items: baseline;

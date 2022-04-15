@@ -1,3 +1,5 @@
+@import "../../importable/colors.scss";
+
 h1,
 h3 {
   margin-top: 1rem;
@@ -22,7 +24,7 @@ div {
     margin-right: 10%;
     margin-left: 10%;
     padding: 2rem;
-    border: 0.2rem solid lightblue;
+    border: 0.2rem solid $lightblue;
     margin-bottom: 1rem;
   }
 
@@ -42,9 +44,9 @@ div {
   border-radius: 5%;
 
   &__correct {
-    background-color: lightgreen !important;
+    background-color: $lightgreen !important;
   }
   &__checked {
-    background-color: red;
+    background-color: $red;
   }
 }

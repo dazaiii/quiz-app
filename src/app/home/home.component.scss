@@ -1,3 +1,5 @@
+@import "../../importable/colors.scss";
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -11,7 +13,7 @@
 }
 
 .element {
-  background-color: rgb(201, 223, 236);
+  background-color: $lightblue2;
   justify-self: center;
   align-self: center;
   width: 100%;

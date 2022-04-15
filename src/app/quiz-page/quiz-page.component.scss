@@ -1,7 +1,9 @@
+@import "../../importable/colors.scss";
+
 .question {
   margin: 1rem;
   padding: 1rem;
-  border: 0.2rem solid lightblue;
+  border: 0.2rem solid $lightblue;
   margin-right: 15%;
   margin-left: 15%;
   line-height: 1.5rem;
