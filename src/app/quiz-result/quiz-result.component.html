@@ -1,3 +1,28 @@
 <h1>{{ getCategory() }} quiz results</h1>
 <h3>Choosen difficulty: {{ getDifficulty() }}</h3>
 <h3>Your score: {{ calculatePoints() }}/{{ getQuestionsAmount() }}</h3>
+
+<div class="questions">
+  <div
+    class="question__with-answer"
+    *ngFor="let question of questions; let i = index"
+  >
+    <div class="question__number">Question number: {{ i + 1 }}</div>
+    <div class="question__content">{{ question.question }}</div>
+    <div
+      class="question__answer"
+      *ngFor="let answer of correctAnswers(question, i)"
+    >
+      <span
+        *ngIf="answer.answer"
+        class="answer"
+        [ngClass]="{
+          answer__correct: answer.isCorrect === 'true',
+          answer__checked: answer.isChecked === true
+        }"
+      >
+        {{ answer.answer }}
+      </span>
+    </div>
+  </div>
+</div>

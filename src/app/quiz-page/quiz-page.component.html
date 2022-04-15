@@ -1,14 +1,14 @@
 <h1>{{ getQuizCategory() }} Quiz page</h1>
 <div class="quiz-information">
-  <div class="questions-amount">
-    Questions amount: {{ getQuestionsAmount() }}
-  </div>
   <div>Difficulty: {{ getDifficulty() }}</div>
+  <div class="quiz-progress">
+    Question: {{ questionNumber + 1 }}/{{ getQuestionsAmount() }}
+  </div>
 </div>
 
 <form [formGroup]="answers">
   <div class="question" *ngIf="question">
-    <div>{{ question.question }}</div>
+    <div class="question__content">{{ question.question }}</div>
     <div *ngIf="question.answers.answer_a">
       <p>
         <mat-checkbox formControlName="a">{{
@@ -78,7 +78,7 @@
     mat-button
     class="submit-button"
     routerLink="/result"
-    (click)="checkAnswer()"
+    (click)="checkAnswer(); submitAnswers()"
   >
     Submit
   </button>

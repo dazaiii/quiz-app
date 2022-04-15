@@ -40,6 +40,7 @@ export class QuizPageComponent implements OnInit {
   displaySubmitButton: boolean = false;
 
   ngOnInit(): void {
+    this.quizService.questionsReset();
     this.getQuestions();
     this.answersValuesInit();
   }
@@ -68,6 +69,7 @@ export class QuizPageComponent implements OnInit {
           this.questions = response;
           this.question = this.questions[0];
           console.log(this.questions);
+          this.quizService.addQuestions(this.questions);
         },
         (error) => {
           console.log(error);
@@ -111,7 +113,6 @@ export class QuizPageComponent implements OnInit {
     } else {
       this.score[this.questionNumber] = 0;
     }
-    console.log('score: ', this.score);
 
     this.quizService.addScore(this.score);
   }
@@ -127,5 +128,10 @@ export class QuizPageComponent implements OnInit {
         f: false,
       });
     }
+  }
+
+  submitAnswers() {
+    this.answersValues[this.questionNumber] = this.answers.value;
+    this.quizService.addUserAnswers(this.answersValues);
   }
 }

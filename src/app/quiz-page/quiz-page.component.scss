@@ -5,11 +5,19 @@
   margin-right: 15%;
   margin-left: 15%;
   line-height: 1.5rem;
+
+  &__content {
+    font-weight: 550;
+  }
 }
 
 .quiz-information {
   display: flex;
   justify-content: center;
+}
+
+.quiz-progress {
+  margin-left: 2rem;
 }
 
 .questions-amount {

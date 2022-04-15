@@ -4,3 +4,47 @@ h3 {
   display: flex;
   justify-content: center;
 }
+
+div {
+  font-size: 1rem;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.question {
+  &__with-answer {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10%;
+    margin-left: 10%;
+    padding: 2rem;
+    border: 0.2rem solid lightblue;
+    margin-bottom: 1rem;
+  }
+
+  &__content {
+    font-weight: 550;
+  }
+
+  &__number {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.answer {
+  padding: 0.1rem;
+  line-height: 1.1rem;
+  line-height: 2rem;
+  border-radius: 5%;
+
+  &__correct {
+    background-color: lightgreen !important;
+  }
+  &__checked {
+    background-color: red;
+  }
+}

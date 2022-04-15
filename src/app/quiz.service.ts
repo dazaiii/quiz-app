@@ -19,6 +19,10 @@ export class QuizService {
 
   points: number = 0;
 
+  questions: any[] = [];
+
+  userAnswers: any[] = [];
+
   addQuestionsAmount(questionAmount: number) {
     this.questionsAmount = questionAmount;
   }
@@ -56,5 +60,26 @@ export class QuizService {
 
   getScore() {
     return this.score;
+  }
+
+  addQuestions(questions: any[]) {
+    this.questions = questions;
+  }
+
+  getQuestions(): any[] {
+    return this.questions;
+  }
+
+  questionsReset() {
+    this.questions = [];
+  }
+
+  addUserAnswers(userAnswers: any[]) {
+    this.userAnswers = userAnswers;
+    console.log(this.userAnswers);
+  }
+
+  getUserAnswers(): any[] {
+    return this.userAnswers;
   }
 }

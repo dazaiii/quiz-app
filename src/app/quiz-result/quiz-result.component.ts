@@ -11,7 +11,11 @@ import { QuizComponent } from '../quiz/quiz.component';
 export class QuizResultComponent implements OnInit {
   constructor(private quizService: QuizService) {}
 
-  ngOnInit(): void {}
+  questions: any[] = [];
+
+  ngOnInit(): void {
+    this.questions = this.getQuestions();
+  }
 
   getCategory() {
     return this.quizService.getQuizCategory();
@@ -29,6 +33,14 @@ export class QuizResultComponent implements OnInit {
     return this.quizService.getQuestionsAmount();
   }
 
+  getQuestions(): any[] {
+    return this.quizService.getQuestions();
+  }
+
+  getUserAnswers(): any[] {
+    return this.quizService.getUserAnswers();
+  }
+
   calculatePoints(): number {
     let score = this.getScore();
     let points = 0;
@@ -36,5 +48,18 @@ export class QuizResultComponent implements OnInit {
       points += point === 1 ? 1 : 0;
     });
     return points;
+  }
+
+  correctAnswers(question: any, questionNumber: number) {
+    let userAnswers = this.getUserAnswers();
+    let userAnswer = Object.values(userAnswers[questionNumber]);
+    const correctAnswers = Object.values(question.correct_answers);
+    return Object.values(question.answers).map((val, index) => {
+      return {
+        answer: val,
+        isCorrect: correctAnswers[index],
+        isChecked: userAnswer[index],
+      };
+    });
   }
 }
