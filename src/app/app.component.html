@@ -1,7 +1,6 @@
 <mat-toolbar>
   <div class="title">Quizz App</div>
   <button mat-button [routerLink]="'/home'">Home</button>
-  <button mat-button>Favorites</button>
-  <button mat-button>Add</button>
+  <button mat-button [routerLink]="'/favorites'">Favorites</button>
 </mat-toolbar>
 <router-outlet></router-outlet>

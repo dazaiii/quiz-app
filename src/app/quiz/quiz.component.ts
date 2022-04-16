@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { QuizCategory, QuizData, QuizDifficulty } from 'src/models/quiz.models';
+import { QuizCategory, QuizData } from 'src/models/quiz.models';
 import { DialogComponent } from '../dialog/dialog.component';
-import { QuizHttpService } from '../quiz-http.service';
 
 @Component({
   selector: 'app-quiz',
@@ -17,15 +16,24 @@ export class QuizComponent implements OnInit {
     favorite: false,
   };
 
+  @Output() quizEvent = new EventEmitter<QuizData>();
+
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
-  openDialog() {
+  openDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent);
     dialogRef.componentInstance.quizCategory = this.quiz.category;
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog result: ${result}');
+      return result;
     });
+  }
+
+  onFavoriteClicked(): void {
+    this.quiz.favorite === true
+      ? (this.quiz.favorite = false)
+      : (this.quiz.favorite = true);
+    this.quizEvent.emit(this.quiz);
   }
 }

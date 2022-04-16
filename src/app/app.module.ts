@@ -19,8 +19,10 @@ import { DialogComponent } from './dialog/dialog.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { QuizPageComponent } from './quiz-page/quiz-page.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuizResultComponent } from './quiz-result/quiz-result.component';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { QuizResultComponent } from './quiz-result/quiz-result.component';
     DialogComponent,
     QuizPageComponent,
     QuizResultComponent,
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,8 +49,10 @@ import { QuizResultComponent } from './quiz-result/quiz-result.component';
     MatSliderModule,
     MatCheckboxModule,
     ReactiveFormsModule,
+    MatInputModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [HttpClientModule, MatDialogModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

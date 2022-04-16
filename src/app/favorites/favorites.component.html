@@ -1,0 +1,5 @@
+<div class="wrapper">
+  <div class="element" *ngFor="let quiz of getFavoriteQuizes()">
+    <app-quiz (quizEvent)="addFavorite($event)" [quiz]="quiz"></app-quiz>
+  </div>
+</div>

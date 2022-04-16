@@ -9,9 +9,24 @@
 
   <div>
     <span>
-      <button mat-icon-button color="warn" aria-label="Heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
+      <div *ngIf="quiz.favorite; else notFavorite">
+        <button
+          (click)="onFavoriteClicked()"
+          mat-icon-button
+          color="warn"
+          aria-label="Heart icon"
+        >
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </div>
     </span>
   </div>
 </div>
+
+<ng-template #notFavorite>
+  <div (click)="onFavoriteClicked()">
+    <button mat-icon-button color="warn" aria-label="Heart icon">
+      <mat-icon>favorite_border</mat-icon>
+    </button>
+  </div>
+</ng-template>

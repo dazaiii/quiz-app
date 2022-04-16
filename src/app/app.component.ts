@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { QuizCategory, QuizData } from 'src/models/quiz.models';
 
 @Component({
   selector: 'app-root',
