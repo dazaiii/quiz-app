@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { QuizCategory, QuizData } from 'src/models/quiz.models';
+import { Component, OnInit } from '@angular/core';
+import { QuizData } from 'src/models/quiz.models';
+import { QuizService } from '../quiz.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -7,52 +9,52 @@ import { QuizCategory, QuizData } from 'src/models/quiz.models';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  constructor(private quizService: QuizService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.quizData = this.quizService.getQuizData();
+  }
 
-  quizData: QuizData[] = [
-    {
-      category: QuizCategory.Linux,
-      imageUrl:
-        'http://cdn.benchmark.pl/uploads/article/81951/MODERNICON/79c8174b200411f446931eb09ec041d332babfc9.jpg',
-      favorite: false,
-    },
-    {
-      category: QuizCategory.Code,
-      imageUrl:
-        'https://nofluffjobs.com/blog/wp-content/uploads/2017/01/pair-programming.png',
-      favorite: false,
-    },
-    {
-      category: QuizCategory.CMS,
-      imageUrl:
-        'https://www.grupa-tense.pl/wp-content/uploads/2021/03/cms_okladka-1.jpg',
-      favorite: false,
-    },
-    {
-      category: QuizCategory.SQL,
-      imageUrl:
-        'https://infoshareacademy.com/wp-content/uploads/2022/01/1920x1080-Wieczorowy-SQL-1.png',
-      favorite: false,
-    },
-    {
-      category: QuizCategory.Docker,
-      imageUrl:
-        'https://www.droptica.pl/sites/droptica.pl/files/styles/blog_banner_image/public/2018-08/docker_codeception-07.jpg?itok=gMKdUxDN',
-      favorite: false,
-    },
-    {
-      category: QuizCategory.DevOps,
-      imageUrl:
-        'https://www.bssolutions.pl/wp-content/uploads/2020/10/devops.png',
-      favorite: false,
-    },
-    {
-      category: QuizCategory.Random,
-      imageUrl:
-        'https://www.incimages.com/uploaded_files/image/1920x1080/getty_497254373_155996.jpg',
-      favorite: false,
-    },
-  ];
+  quizData: QuizData[] = [];
+
+  filteredQuizData: QuizData[] = [];
+
+  searchForm = new FormControl('');
+
+  quizNotFound: boolean = false;
+
+  getQuizData(): QuizData[] {
+    return this.quizService.getQuizData();
+  }
+
+  addFavorite(sentQuiz: QuizData): void {
+    this.quizData.forEach((quiz) => {
+      if (quiz.category === sentQuiz.category) {
+        quiz.favorite = sentQuiz.favorite;
+      }
+    });
+    this.quizService.addQuizData(this.quizData);
+  }
+
+  filterQuizes(): void {
+    this.filteredQuizData = [];
+    this.quizData.filter((quiz) => {
+      if (
+        quiz.category
+          .toLowerCase()
+          .includes(this.searchForm.value.toLowerCase())
+      ) {
+        this.filteredQuizData.push(quiz);
+      }
+    });
+    if (this.filteredQuizData.length === 0) {
+      this.quizData = [];
+    }
+  }
+
+  clearFilter(): void {
+    this.filteredQuizData = [];
+    this.searchForm.setValue('');
+    this.quizData = this.quizService.getQuizData();
+  }
 }
