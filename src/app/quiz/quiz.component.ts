@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { QuizCategory, QuizData } from 'src/models/quiz.models';
+import { CommentsSectionComponent } from '../comments-section/comments-section.component';
 import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
@@ -24,6 +25,14 @@ export class QuizComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent);
+    dialogRef.componentInstance.quizCategory = this.quiz.category;
+    dialogRef.afterClosed().subscribe((result) => {
+      return result;
+    });
+  }
+
+  openCommentsSection(): void {
+    const dialogRef = this.dialog.open(CommentsSectionComponent);
     dialogRef.componentInstance.quizCategory = this.quiz.category;
     dialogRef.afterClosed().subscribe((result) => {
       return result;

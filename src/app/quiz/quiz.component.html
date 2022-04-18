@@ -8,7 +8,7 @@
   </div>
 
   <div>
-    <span>
+    <span class="quiz-buttons">
       <div *ngIf="quiz.favorite; else notFavorite">
         <button
           (click)="onFavoriteClicked()"
@@ -17,6 +17,11 @@
           aria-label="Heart icon"
         >
           <mat-icon>favorite</mat-icon>
+        </button>
+      </div>
+      <div>
+        <button mat-icon-button (click)="openCommentsSection()">
+          <mat-icon class="comments-button">comment</mat-icon>
         </button>
       </div>
     </span>

@@ -1,3 +1,5 @@
+@import "../../importable/colors.scss";
+
 .quiz-content {
   padding: 1rem;
 }
@@ -13,6 +15,11 @@ img {
   width: 100%;
   transition: 0.5s ease;
   aspect-ratio: 16/9;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
 }
 
 .middle {
@@ -23,6 +30,14 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
+}
+
+.quiz-buttons {
+  display: flex;
+}
+
+.comments-button {
+  color: $blue;
 }
 
 .image-container:hover img {

@@ -1,0 +1,44 @@
+@import "../../importable/colors.scss";
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: end;
+}
+
+.comment-section {
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__comment {
+    word-break: break-word;
+  }
+
+  &__space {
+    margin-bottom: 1rem;
+  }
+}
+
+.user-icon {
+  background-color: $blue;
+  color: white;
+  padding: 0.2rem;
+  border-radius: 50%;
+}

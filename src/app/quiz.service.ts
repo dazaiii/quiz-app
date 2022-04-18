@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CommentData } from 'src/models/comments.models';
 import { QuizCategory, QuizData, QuizDifficulty } from 'src/models/quiz.models';
 
 @Injectable({
@@ -22,6 +23,8 @@ export class QuizService {
   questions: any[] = [];
 
   userAnswers: any[] = [];
+
+  comments = new Map<QuizCategory, CommentData[]>();
 
   quizData: QuizData[] = [
     {
@@ -134,5 +137,13 @@ export class QuizService {
 
   getQuizData(): QuizData[] {
     return this.quizData;
+  }
+
+  addComments(comments: CommentData[], quizCategory: QuizCategory) {
+    this.comments.set(quizCategory, comments);
+  }
+
+  getComments(quizCategory: QuizCategory): CommentData[] | undefined {
+    return this.comments.get(quizCategory);
   }
 }

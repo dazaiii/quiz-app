@@ -42,6 +42,12 @@ describe('QuizComponent', () => {
     expect(dialogRefSpyObj.afterClosed).toHaveBeenCalled();
   });
 
+  it('should open comments section', () => {
+    component.openCommentsSection();
+    expect(dialogSpy).toHaveBeenCalled();
+    expect(dialogRefSpyObj.afterClosed).toHaveBeenCalled();
+  });
+
   it('should add quiz to favorites', () => {
     component.quiz = {
       category: QuizCategory.Linux,
