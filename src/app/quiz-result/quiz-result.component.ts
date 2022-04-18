@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizCategory, QuizDifficulty } from 'src/models/quiz.models';
 import { QuizService } from '../quiz.service';
-import { QuizComponent } from '../quiz/quiz.component';
 
 @Component({
   selector: 'app-quiz-result',
@@ -12,6 +10,10 @@ export class QuizResultComponent implements OnInit {
   constructor(private quizService: QuizService) {}
 
   questions: any[] = [];
+
+  score: number[] = this.getScore();
+
+  userAnswers: any[] = this.getUserAnswers();
 
   ngOnInit(): void {
     this.questions = this.getQuestions();
@@ -42,17 +44,15 @@ export class QuizResultComponent implements OnInit {
   }
 
   calculatePoints(): number {
-    let score = this.getScore();
     let points = 0;
-    score.forEach((point) => {
+    this.score.forEach((point) => {
       points += point === 1 ? 1 : 0;
     });
     return points;
   }
 
   correctAnswers(question: any, questionNumber: number) {
-    let userAnswers = this.getUserAnswers();
-    let userAnswer = Object.values(userAnswers[questionNumber]);
+    let userAnswer = Object.values(this.userAnswers[questionNumber]);
     const correctAnswers = Object.values(question.correct_answers);
     return Object.values(question.answers).map((val, index) => {
       return {

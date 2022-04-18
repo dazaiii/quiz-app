@@ -18,7 +18,7 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  saveDifficulty(event: any) {
+  saveDifficulty(event: any): void {
     switch (event.value) {
       case 1:
         this.difficulty = QuizDifficulty.Easy;
@@ -33,17 +33,17 @@ export class DialogComponent implements OnInit {
     this.quizService.addDifficulty(this.difficulty);
   }
 
-  saveQuestionsAmount(event: any) {
+  saveQuestionsAmount(event: any): void {
     this.questionsAmount = event.value;
     this.quizService.addQuestionsAmount(this.questionsAmount);
   }
 
-  saveQuizCategory() {
+  saveQuizCategory(): void {
     this.quizService.addQuizCategory(this.quizCategory);
     this.setMaxNumberOfQuestions();
   }
 
-  setMaxNumberOfQuestions() {
+  setMaxNumberOfQuestions(): number {
     let maxNumberOfQuestions: number;
     if (
       this.quizCategory === QuizCategory.CMS &&

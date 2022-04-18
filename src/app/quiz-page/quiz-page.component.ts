@@ -39,6 +39,8 @@ export class QuizPageComponent implements OnInit {
 
   displaySubmitButton: boolean = false;
 
+  questionsAmount: number = this.getQuestionsAmount();
+
   ngOnInit(): void {
     this.quizService.questionsReset();
     this.getQuestions();
@@ -57,7 +59,7 @@ export class QuizPageComponent implements OnInit {
     return this.quizService.getQuizCategory();
   }
 
-  getQuestions() {
+  getQuestions(): void {
     this.quizHttpService
       .getQuestions(
         this.getQuizCategory(),
@@ -77,8 +79,8 @@ export class QuizPageComponent implements OnInit {
       );
   }
 
-  nextQuestion() {
-    if (this.questionNumber === this.getQuestionsAmount() - 1) {
+  nextQuestion(): void {
+    if (this.questionNumber === this.questionsAmount - 1) {
       this.displaySubmitButton = true;
       return;
     }
@@ -89,21 +91,21 @@ export class QuizPageComponent implements OnInit {
     this.question = this.questions[this.questionNumber];
   }
 
-  previousQuestion() {
+  previousQuestion(): void {
     if (this.questionNumber === 0) {
       return;
     }
     this.answersValues[this.questionNumber] = this.answers.value;
     this.questionNumber -= 1;
     this.answers.reset(this.answersValues[this.questionNumber]);
-    if (this.questionNumber !== this.getQuestionsAmount() - 1) {
+    if (this.questionNumber !== this.questionsAmount - 1) {
       this.displaySubmitButton = false;
     }
     this.score[this.questionNumber] = 0;
     this.question = this.questions[this.questionNumber];
   }
 
-  checkAnswer() {
+  checkAnswer(): void {
     const correctAnswers = (
       Object.values(this.question.correct_answers) as string[]
     ).map((x) => x.toLowerCase() === 'true');
@@ -117,8 +119,8 @@ export class QuizPageComponent implements OnInit {
     this.quizService.addScore(this.score);
   }
 
-  answersValuesInit() {
-    for (let i = 0; i < this.getQuestionsAmount(); i++) {
+  answersValuesInit(): void {
+    for (let i = 0; i < this.questionsAmount; i++) {
       this.answersValues.push({
         a: false,
         b: false,
@@ -130,7 +132,7 @@ export class QuizPageComponent implements OnInit {
     }
   }
 
-  submitAnswers() {
+  submitAnswers(): void {
     this.answersValues[this.questionNumber] = this.answers.value;
     this.quizService.addUserAnswers(this.answersValues);
   }
