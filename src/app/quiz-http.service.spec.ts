@@ -7,7 +7,8 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { QuizCategory, QuizDifficulty } from 'src/models/quiz.models';
 
 describe('QuizHttpService', () => {
   let service: QuizHttpService;
@@ -23,5 +24,15 @@ describe('QuizHttpService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should called getQuestions', () => {
+    let category: QuizCategory = QuizCategory.Code;
+    let difficulty: QuizDifficulty = QuizDifficulty.Medium;
+    let limit = 10;
+
+    spyOn(service, 'getQuestions').and.callThrough();
+    service.getQuestions(category, difficulty, limit);
+    expect(service.getQuestions).toHaveBeenCalled();
   });
 });

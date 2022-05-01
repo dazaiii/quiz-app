@@ -1,13 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { QuizPageComponent } from './quiz-page.component';
-
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
-
-import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {
   FormControl,
   FormGroup,
@@ -18,8 +11,6 @@ import {
 describe('QuizPageComponent', () => {
   let component: QuizPageComponent;
   let fixture: ComponentFixture<QuizPageComponent>;
-  let httpClient: HttpClient;
-  let httpTestingController: HttpTestingController;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -32,8 +23,6 @@ describe('QuizPageComponent', () => {
     fixture = TestBed.createComponent(QuizPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    httpClient = TestBed.get(HttpClient);
-    httpTestingController = TestBed.get(HttpTestingController);
 
     component.question = {
       id: 1,
@@ -204,5 +193,21 @@ describe('QuizPageComponent', () => {
     component.score[component.questionNumber] = 1;
     component.previousQuestion();
     expect(component.score[component.questionNumber]).toBe(0);
+  });
+
+  it('should put form in the array when clicking next', () => {
+    component.questionNumber = 0;
+    component.nextQuestion();
+    expect(component.answers.value).toEqual(
+      component.answersValues[component.questionNumber]
+    );
+  });
+
+  it('should put form in the array when clicking previous', () => {
+    component.questionNumber = 0;
+    component.previousQuestion();
+    expect(component.answers.value).toEqual(
+      component.answersValues[component.questionNumber]
+    );
   });
 });

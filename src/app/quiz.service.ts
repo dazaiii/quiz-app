@@ -83,6 +83,10 @@ export class QuizService {
     this.difficulty = difficulty;
   }
 
+  getDifficulty(): QuizDifficulty {
+    return this.difficulty;
+  }
+
   addMaxQuestionsAmount(maxQuestionsAmount: number) {
     this.maxQuestionsAmount = maxQuestionsAmount;
     if (this.questionsAmount > this.maxQuestionsAmount) {
@@ -94,8 +98,8 @@ export class QuizService {
     this.score = score;
   }
 
-  getDifficulty(): QuizDifficulty {
-    return this.difficulty;
+  getScore() {
+    return this.score;
   }
 
   addQuizCategory(quizCategory: QuizCategory) {
@@ -104,10 +108,6 @@ export class QuizService {
 
   getQuizCategory(): QuizCategory {
     return this.quizCategory;
-  }
-
-  getScore() {
-    return this.score;
   }
 
   addQuestions(questions: any[]) {
@@ -124,7 +124,6 @@ export class QuizService {
 
   addUserAnswers(userAnswers: any[]) {
     this.userAnswers = userAnswers;
-    console.log(this.userAnswers);
   }
 
   getUserAnswers(): any[] {

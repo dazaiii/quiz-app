@@ -70,7 +70,6 @@ export class QuizPageComponent implements OnInit {
         (response) => {
           this.questions = response;
           this.question = this.questions[0];
-          console.log(this.questions);
           this.quizService.addQuestions(this.questions);
         },
         (error) => {
