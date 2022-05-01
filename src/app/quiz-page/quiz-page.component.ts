@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { QuizCategory, QuizDifficulty } from 'src/models/quiz.models';
 import { QuizHttpService } from '../quiz-http.service';
@@ -71,7 +71,6 @@ export class QuizPageComponent implements OnInit {
           this.questions = response;
           this.question = this.questions[0];
           this.quizService.addQuestions(this.questions);
-          console.log(this.questions);
         },
         (error) => {
           console.log(error);
@@ -135,5 +134,10 @@ export class QuizPageComponent implements OnInit {
   submitAnswers(): void {
     this.answersValues[this.questionNumber] = this.answers.value;
     this.quizService.addUserAnswers(this.answersValues);
+  }
+
+  noAnswerCheck(): boolean {
+    const userAnswersValues = Object.values(this.answers.value) as boolean[];
+    return userAnswersValues.every((answer) => answer === false);
   }
 }

@@ -210,4 +210,26 @@ describe('QuizPageComponent', () => {
       component.answersValues[component.questionNumber]
     );
   });
+
+  it('should check if question has no answers', () => {
+    component.answers = new FormGroup({
+      a: new FormControl(false),
+      b: new FormControl(false),
+      c: new FormControl(false),
+      d: new FormControl(false),
+      e: new FormControl(false),
+      f: new FormControl(false),
+    });
+    expect(component.noAnswerCheck()).toEqual(true);
+
+    component.answers = new FormGroup({
+      a: new FormControl(false),
+      b: new FormControl(false),
+      c: new FormControl(true),
+      d: new FormControl(false),
+      e: new FormControl(false),
+      f: new FormControl(false),
+    });
+    expect(component.noAnswerCheck()).toEqual(false);
+  });
 });

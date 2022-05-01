@@ -58,7 +58,7 @@
       mat-button
       class="next-button"
       (click)="nextQuestion()"
-      [disabled]="displaySubmitButton"
+      [disabled]="displaySubmitButton || noAnswerCheck() === true"
     >
       Next
     </button>
@@ -66,7 +66,7 @@
       mat-button
       class="previous-button"
       (click)="previousQuestion()"
-      [disabled]="this.questionNumber === 0"
+      [disabled]="this.questionNumber === 0 || noAnswerCheck() === true"
     >
       Previous
     </button>
