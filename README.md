@@ -4,15 +4,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## About
 
-This application is created using Angular, Angular Material, TypeScript, SCSS and HTML. To get technical questions I used a HTTP REST API `Quiz Api`.
+This application was created using Angular, Angular Material, TypeScript, SCSS and HTML. To get technical questions I used a HTTP REST API `Quiz Api`.
 
 This project uses reusable UI components from Angular Material like toolbar, dialog, input, slider and more.
 
-Reactive forms are used to handle checkboxes with answers, comments and search bar. User input for comments is validated and display useful validation messages.
+Reactive forms were used to handle checkboxes with answers, comments and search bar. User input for comments is validated and display useful validation messages.
 
 Navigation was made with Angular Routing. Application can be used on different media types/devices because of media queries.
 
-Unit tests are created with Jasmine and Karma.
+Unit tests were created with Jasmine and Karma.
 
 ## Taking a quiz
 
