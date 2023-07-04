@@ -8,21 +8,21 @@ import { QuizService } from '../quiz.service';
   styleUrls: ['./favorites.component.scss'],
 })
 export class FavoritesComponent implements OnInit {
+  private quizData: QuizData[] = [];
+
   constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
     this.quizData = this.quizService.getQuizData();
   }
 
-  quizData: QuizData[] = [];
-
-  getFavoriteQuizes(): QuizData[] {
+  public getFavoriteQuizes(): QuizData[] {
     return this.quizData.filter((quiz) => {
       return quiz.favorite === true;
     });
   }
 
-  addFavorite(sentQuiz: QuizData): void {
+  public addFavorite(sentQuiz: QuizData): void {
     this.quizData.forEach((quiz) => {
       if (quiz.category === sentQuiz.category) {
         quiz.favorite = sentQuiz.favorite;

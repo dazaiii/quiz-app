@@ -7,43 +7,41 @@ import { QuizService } from '../quiz.service';
   styleUrls: ['./quiz-result.component.scss'],
 })
 export class QuizResultComponent implements OnInit {
+  public questions: any[] = [];
+  public score: number[] = this.getScore().value;
+  public userAnswers: any[] = this.getUserAnswers();
+
   constructor(private quizService: QuizService) {}
-
-  questions: any[] = [];
-
-  score: number[] = this.getScore();
-
-  userAnswers: any[] = this.getUserAnswers();
 
   ngOnInit(): void {
     this.questions = this.getQuestions();
   }
 
-  getCategory() {
-    return this.quizService.getQuizCategory();
+  public getCategory() {
+    return this.quizService.getQuizCategory().value;
   }
 
-  getDifficulty() {
-    return this.quizService.getDifficulty();
+  public getDifficulty() {
+    return this.quizService.getDifficulty().value;
   }
 
-  getScore() {
+  public getScore() {
     return this.quizService.getScore();
   }
 
-  getQuestionsAmount() {
-    return this.quizService.getQuestionsAmount();
+  public getQuestionsAmount() {
+    return this.quizService.getQuestionsAmount().value;
   }
 
-  getQuestions(): any[] {
-    return this.quizService.getQuestions();
+  public getQuestions(): any[] {
+    return this.quizService.getQuestions().value;
   }
 
-  getUserAnswers(): any[] {
-    return this.quizService.getUserAnswers();
+  public getUserAnswers(): any[] {
+    return this.quizService.getUserAnswers().value;
   }
 
-  calculatePoints(): number {
+  public calculatePoints(): number {
     let points = 0;
     this.score.forEach((point) => {
       points += point === 1 ? 1 : 0;
@@ -51,7 +49,7 @@ export class QuizResultComponent implements OnInit {
     return points;
   }
 
-  correctAnswers(question: any, questionNumber: number) {
+  public correctAnswers(question: any, questionNumber: number) {
     let userAnswer = Object.values(this.userAnswers[questionNumber]);
     const correctAnswers = Object.values(question.correct_answers);
     return Object.values(question.answers).map((val, index) => {

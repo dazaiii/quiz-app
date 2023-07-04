@@ -17,34 +17,36 @@ describe('QuizService', () => {
 
   it('should add and get questions amount', () => {
     service.addQuestionsAmount(10);
-    expect(service.getQuestionsAmount()).toEqual(10);
+    expect(service.getQuestionsAmount().value).toEqual(10);
   });
 
   it('should add and get difficulty', () => {
     service.addDifficulty(QuizDifficulty.Easy);
-    expect(service.getDifficulty()).toEqual(QuizDifficulty.Easy);
+    expect(service.getDifficulty().value).toEqual(QuizDifficulty.Easy);
   });
 
   it('should add max questions amount', () => {
     service.addQuestionsAmount(30);
     service.addMaxQuestionsAmount(20);
-    expect(service.questionsAmount).toEqual(service.maxQuestionsAmount);
+    expect(service.getQuestionsAmount().value).toEqual(
+      service.maxQuestionsAmount
+    );
     expect(service.maxQuestionsAmount).toEqual(20);
 
     service.addQuestionsAmount(5);
     service.addMaxQuestionsAmount(10);
-    expect(service.questionsAmount).toEqual(5);
+    expect(service.getQuestionsAmount().value).toEqual(5);
     expect(service.maxQuestionsAmount).toEqual(10);
   });
 
   it('should add and get score', () => {
     service.addScore([0, 0, 1, 1, 0, 1]);
-    expect(service.getScore()).toEqual([0, 0, 1, 1, 0, 1]);
+    expect(service.getScore().value).toEqual([0, 0, 1, 1, 0, 1]);
   });
 
   it('should add and get quiz category', () => {
     service.addQuizCategory(QuizCategory.Code);
-    expect(service.getQuizCategory()).toEqual(QuizCategory.Code);
+    expect(service.getQuizCategory().value).toEqual(QuizCategory.Code);
   });
 
   it('should add, get and reset questions', () => {
@@ -78,9 +80,9 @@ describe('QuizService', () => {
       },
     ];
     service.addQuestions(question);
-    expect(service.getQuestions()).toEqual(question);
+    expect(service.getQuestions().value).toEqual(question);
     service.questionsReset();
-    expect(service.questions).toEqual([]);
+    expect(service.getQuestions().value).toEqual([]);
   });
 
   it('should add and get user answers', () => {
@@ -95,7 +97,7 @@ describe('QuizService', () => {
       },
     ];
     service.addUserAnswers(answersValues);
-    expect(service.getUserAnswers()).toEqual(answersValues);
+    expect(service.getUserAnswers().value).toEqual(answersValues);
   });
 
   it('should add and get quiz data', () => {

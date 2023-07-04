@@ -22,6 +22,7 @@ import { QuizResultComponent } from './quiz-result/quiz-result.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { MatInputModule } from '@angular/material/input';
 import { CommentsSectionComponent } from './comments-section/comments-section.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CommentsSectionComponent } from './comments-section/comments-section.co
     ReactiveFormsModule,
     MatInputModule,
     FormsModule,
+    MatSnackBarModule,
   ],
   providers: [HttpClientModule, MatDialogModule],
   bootstrap: [AppComponent],

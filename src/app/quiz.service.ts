@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { CommentData } from 'src/models/comments.models';
 import { QuizCategory, QuizData, QuizDifficulty } from 'src/models/quiz.models';
 
@@ -8,25 +9,17 @@ import { QuizCategory, QuizData, QuizDifficulty } from 'src/models/quiz.models';
 export class QuizService {
   constructor() {}
 
-  questionsAmount: number = 1;
+  private questionsAmount = new BehaviorSubject<number>(1);
+  private difficulty = new BehaviorSubject<QuizDifficulty>(QuizDifficulty.Easy);
+  private quizCategory = new BehaviorSubject<QuizCategory>(QuizCategory.Linux);
+  private score = new BehaviorSubject<number[]>([]);
+  private questions = new BehaviorSubject<any[]>([]);
+  private userAnswers = new BehaviorSubject<any[]>([]);
 
-  difficulty: QuizDifficulty = QuizDifficulty.Easy;
+  private maxQuestionsAmount: number = 15;
+  private comments = new Map<QuizCategory, CommentData[]>();
 
-  quizCategory: QuizCategory = QuizCategory.Linux;
-
-  maxQuestionsAmount: number = 15;
-
-  score: number[] = [];
-
-  points: number = 0;
-
-  questions: any[] = [];
-
-  userAnswers: any[] = [];
-
-  comments = new Map<QuizCategory, CommentData[]>();
-
-  quizData: QuizData[] = [
+  private quizData: QuizData[] = [
     {
       category: QuizCategory.Linux,
       imageUrl: '/assets/images/linux.jpg',
@@ -64,78 +57,78 @@ export class QuizService {
     },
   ];
 
-  addQuestionsAmount(questionAmount: number) {
-    this.questionsAmount = questionAmount;
+  public addQuestionsAmount(questionAmount: number) {
+    this.questionsAmount.next(questionAmount);
   }
 
-  getQuestionsAmount(): number {
+  public getQuestionsAmount(): BehaviorSubject<number> {
     return this.questionsAmount;
   }
 
-  addDifficulty(difficulty: QuizDifficulty) {
-    this.difficulty = difficulty;
+  public addDifficulty(difficulty: QuizDifficulty) {
+    this.difficulty.next(difficulty);
   }
 
-  getDifficulty(): QuizDifficulty {
+  public getDifficulty(): BehaviorSubject<QuizDifficulty> {
     return this.difficulty;
   }
 
-  addMaxQuestionsAmount(maxQuestionsAmount: number) {
+  public addMaxQuestionsAmount(maxQuestionsAmount: number) {
     this.maxQuestionsAmount = maxQuestionsAmount;
-    if (this.questionsAmount > this.maxQuestionsAmount) {
-      this.questionsAmount = this.maxQuestionsAmount;
+    if (this.getQuestionsAmount().value > this.maxQuestionsAmount) {
+      this.addQuestionsAmount(this.maxQuestionsAmount);
     }
   }
 
-  addScore(score: number[]) {
-    this.score = score;
+  public addScore(score: number[]): void {
+    this.score.next(score);
   }
 
-  getScore() {
+  public getScore(): BehaviorSubject<number[]> {
     return this.score;
   }
 
-  addQuizCategory(quizCategory: QuizCategory) {
-    this.quizCategory = quizCategory;
+  public addQuizCategory(quizCategory: QuizCategory) {
+    this.quizCategory.next(quizCategory);
   }
 
-  getQuizCategory(): QuizCategory {
+  public getQuizCategory(): BehaviorSubject<QuizCategory> {
     return this.quizCategory;
   }
 
-  addQuestions(questions: any[]) {
-    this.questions = questions;
+  public addQuestions(questions: any[]): void {
+    this.questions.next(questions);
   }
 
-  getQuestions(): any[] {
+  public getQuestions(): BehaviorSubject<any[]> {
     return this.questions;
   }
 
-  questionsReset() {
-    this.questions = [];
+  public questionsReset(): void {
+    this.addQuestions([]);
   }
 
-  addUserAnswers(userAnswers: any[]) {
-    this.userAnswers = userAnswers;
+  public addUserAnswers(userAnswers: any[]): void {
+    this.userAnswers.next(userAnswers);
   }
 
-  getUserAnswers(): any[] {
+  public getUserAnswers(): BehaviorSubject<any[]> {
     return this.userAnswers;
   }
 
-  addQuizData(quizData: QuizData[]) {
+  public addQuizData(quizData: QuizData[]) {
     this.quizData = quizData;
   }
 
-  getQuizData(): QuizData[] {
+  public getQuizData(): QuizData[] {
     return this.quizData;
   }
 
-  addComments(comments: CommentData[], quizCategory: QuizCategory) {
+  public addComments(comments: CommentData[], quizCategory: QuizCategory) {
     this.comments.set(quizCategory, comments);
   }
 
-  getComments(quizCategory: QuizCategory): CommentData[] | undefined {
+  public getComments(quizCategory: QuizCategory): CommentData[] | undefined {
     return this.comments.get(quizCategory);
   }
 }

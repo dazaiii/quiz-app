@@ -5,6 +5,7 @@ import {
   FormBuilder,
   Validators,
   FormControl,
+  AbstractControl,
 } from '@angular/forms';
 import { CommentData } from 'src/models/comments.models';
 import { QuizService } from '../quiz.service';
@@ -15,41 +16,50 @@ import { QuizService } from '../quiz.service';
   styleUrls: ['./comments-section.component.scss'],
 })
 export class CommentsSectionComponent implements OnInit {
+  public quizCategory: QuizCategory = QuizCategory.Linux;
+  public commentForm: FormGroup;
+  public comments: CommentData[] = [];
+
   constructor(fb: FormBuilder, private quizService: QuizService) {
     this.commentForm = fb.group({
       email: fb.control('', [Validators.required, Validators.email]),
-      text: fb.control('', [Validators.required, this.noWhitespaceValidator]),
+      text: fb.control('', [
+        Validators.required,
+        Validators.minLength(20),
+        Validators.maxLength(255),
+        this.noWhitespaceValidator,
+      ]),
     });
   }
 
   ngOnInit(): void {
+    this.getComments();
+  }
+
+  private getComments(): void {
     const commentsData = this.quizService.getComments(this.quizCategory);
     if (commentsData) {
       this.comments = commentsData;
     }
   }
 
-  quizCategory: QuizCategory = QuizCategory.Linux;
-
-  commentForm: FormGroup;
-
-  comments: CommentData[] = [];
-
-  get email() {
+  get email(): AbstractControl | null {
     return this.commentForm.get('email');
   }
 
-  get text() {
+  get text(): AbstractControl | null {
     return this.commentForm.get('text');
   }
 
-  public noWhitespaceValidator(control: FormControl) {
+  public noWhitespaceValidator(
+    control: AbstractControl
+  ): { whitespace: boolean } | null {
     return (control.value || '').trim().length === 0
       ? { whitespace: true }
       : null;
   }
 
-  onSubmit(commentForm: FormGroup) {
+  public onSubmit(commentForm: FormGroup): void {
     if (
       !commentForm.value.email ||
       this.email?.hasError('email') ||

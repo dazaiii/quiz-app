@@ -1,15 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { QuizCategory, QuizData } from 'src/models/quiz.models';
 import { CommentsSectionComponent } from '../comments-section/comments-section.component';
 import { DialogComponent } from '../dialog/dialog.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
 })
-export class QuizComponent implements OnInit {
+export class QuizComponent {
   @Input()
   quiz: QuizData = {
     category: QuizCategory.Linux,
@@ -21,26 +22,30 @@ export class QuizComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
-  ngOnInit(): void {}
-
-  openDialog(): void {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent);
     dialogRef.componentInstance.quizCategory = this.quiz.category;
-    dialogRef.afterClosed().subscribe((result) => {
-      return result;
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((result) => {
+        return result;
+      });
   }
 
-  openCommentsSection(): void {
+  public openCommentsSection(): void {
     const dialogRef = this.dialog.open(CommentsSectionComponent);
     dialogRef.componentInstance.quizCategory = this.quiz.category;
-    dialogRef.afterClosed().subscribe((result) => {
-      return result;
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((result) => {
+        return result;
+      });
   }
 
-  onFavoriteClicked(): void {
-    this.quiz.favorite === true
+  public onFavoriteClicked(): void {
+    this.quiz.favorite
       ? (this.quiz.favorite = false)
       : (this.quiz.favorite = true);
     this.quizEvent.emit(this.quiz);

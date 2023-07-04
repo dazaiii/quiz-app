@@ -36,6 +36,12 @@
       >
         Enter valid text
       </mat-error>
+      <mat-error *ngIf="text?.hasError('minlength')">
+        Minimum length is 20
+      </mat-error>
+      <mat-error *ngIf="text?.hasError('maxlength')">
+        Maximum length is 255
+      </mat-error>
     </mat-form-field>
     <div class="dialog-buttons">
       <button mat-button mat-dialog-close>Cancel</button>

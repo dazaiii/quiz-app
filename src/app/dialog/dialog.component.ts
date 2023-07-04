@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { QuizCategory, QuizDifficulty } from 'src/models/quiz.models';
 import { QuizService } from '../quiz.service';
 
@@ -7,18 +7,14 @@ import { QuizService } from '../quiz.service';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
 })
-export class DialogComponent implements OnInit {
-  difficulty: QuizDifficulty = QuizDifficulty.Easy;
-
-  questionsAmount: number = 1;
-
-  quizCategory: QuizCategory = QuizCategory.Linux;
+export class DialogComponent {
+  public difficulty: QuizDifficulty = QuizDifficulty.Easy;
+  public questionsAmount: number = 1;
+  public quizCategory: QuizCategory = QuizCategory.Linux;
 
   constructor(private quizService: QuizService) {}
 
-  ngOnInit(): void {}
-
-  saveDifficulty(event: any): void {
+  public saveDifficulty(event: any): void {
     switch (event.value) {
       case 1:
         this.difficulty = QuizDifficulty.Easy;
@@ -33,17 +29,17 @@ export class DialogComponent implements OnInit {
     this.quizService.addDifficulty(this.difficulty);
   }
 
-  saveQuestionsAmount(event: any): void {
+  public saveQuestionsAmount(event: any): void {
     this.questionsAmount = event.value;
     this.quizService.addQuestionsAmount(this.questionsAmount);
   }
 
-  saveQuizCategory(): void {
+  public saveQuizCategory(): void {
     this.quizService.addQuizCategory(this.quizCategory);
     this.setMaxNumberOfQuestions();
   }
 
-  setMaxNumberOfQuestions(): number {
+  public setMaxNumberOfQuestions(): number {
     let maxNumberOfQuestions: number;
     if (
       this.quizCategory === QuizCategory.CMS &&
